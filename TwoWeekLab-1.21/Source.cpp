@@ -4,19 +4,24 @@ using namespace std;
 
 int main()
 {
-	int i = 0, a, max;
+	int a, max, min;
+	bool check = true;
 
 	while ((cout << " >  ", cin >> a) && (a != 0))
 	{
-		if (!i)
+		if (check)
 		{
 			max = a;
+			min = a;
+			check = false;
 			continue;
 		}
-		else max = (a > max) ? a : max;
+		max = (a > max) ? a : max;
+		min = (a < min) ? a : min;
 	}
 
 	cout << "Max = " << max << endl;
+	cout << "Min = " << min << endl;
 
 	system("pause");
 	return NULL;
