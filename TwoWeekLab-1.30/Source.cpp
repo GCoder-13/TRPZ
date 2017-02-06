@@ -9,17 +9,19 @@ int main()
 	cin >> num;
 	if (!num)
 	{
-		cout << "error!" << endl;
+		cout << "Divide by zero!" << endl;
 		system("pause");
 		return NULL;
 	}
+	if (num < 0)
+		num = -num;
 	i = num;
 
 	while (i >= -num)
 	{
 		if (i != 0 && !(num%i))
 			cout << i << "\t";
-		i--;
+			i--;
 	}
 
 	cout << endl;

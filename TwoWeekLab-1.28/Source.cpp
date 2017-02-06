@@ -4,12 +4,12 @@ using namespace std;
 
 int main()
 {
-	int num, i = 0, w = 0;;
+	int num, i = 0, w = 0;
 	cout << "Enter number: ";
 	cin >> num;
 	if (!num)
 	{
-		cout << "error!" << endl;
+		cout << "Divide by zero!!" << endl;
 		system("pause");
 		return NULL;
 	}
