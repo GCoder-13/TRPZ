@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{12638654-B6C5-47E0-84D6-E2A66D23AE46}</ProjectGuid>
-    <RootNamespace>TwoWeekLab1</RootNamespace>
+    <ProjectGuid>{22FB558C-5118-4257-B226-1EE45F33A526}</ProjectGuid>
+    <RootNamespace>TwoWeekLab121</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
