@@ -16,8 +16,8 @@ int main()
 			check = false;
 			continue;
 		}
-		max = (a > max) ? a : max;
-		min = (a < min) ? a : min;
+		max = (a >= max) ? a : max;
+		min = (a <= min) ? a : min;
 	}
 
 	cout << "Max = " << max << endl;
