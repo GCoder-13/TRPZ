@@ -7,6 +7,12 @@ int main()
 	int num, i;
 	cout << "Enter number: ";
 	cin >> num;
+	if (!num)
+	{
+		cout << "error!" << endl;
+		system("pause");
+		return NULL;
+	}
 	i = num;
 
 	while (i >= -num)
