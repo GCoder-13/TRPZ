@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -27,18 +28,6 @@ void ArrInput(int**& A, const int n, const int m)
 			cin >> A[i][j];
 		}
 		cout << "==============" << endl;
-	}
-}
-
-void ArrOutput(const int** A, const int n, const int m)
-{
-	for (int i(0); i < n; i++)
-	{
-		for (int j(0); j < m; j++)
-		{
-			cout << A[i][j] << '\t';
-		}
-		cout << endl;
 	}
 }
 
@@ -75,8 +64,8 @@ int ArrSumPluss(int** A, const int n, const int m)
 			{
 				sw = true;
 			}
-			if (sw)
-				sum += A[i][j];
+			else if (sw)
+				sum += abs(A[i][j]);
 		}
 	return sum;
 }
