@@ -74,6 +74,28 @@ void CheckSum(int** A, const int n)
 		cout << "These elements not found" << endl;
 }
 
+void RowSumNotZero(int** A, const int n)
+{
+	bool found = false;
+	for (int i(0); i < n; i++)
+	{
+		int sum = 0, notZero = 0;
+		for (int j(0); j < n; j++)
+		{
+			sum += A[i][j];
+			if(A[i][j] != 0)
+				notZero++;
+		}
+		if (notZero >= 2)
+		{
+			found = true;
+			cout << "\t Row " << i + 1 << ": " << sum << endl;
+		}
+	}
+	if(!found)
+		cout << "These elements not found" << endl;
+}
+
 int main()
 {
 	int n;
@@ -86,6 +108,8 @@ int main()
 	cout << endl << "The sum of elements row = sum elements colum: " << endl;
 	CheckSum(arr, n);
 	
+	cout << endl << "The sum of elements rows:" << endl;
+	RowSumNotZero(arr, n);
 
 	ArrDelete(arr, n);
 	system("pause");
