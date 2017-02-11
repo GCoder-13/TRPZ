@@ -11,7 +11,7 @@ int**& ArrCreate(const int n, const int m)
 	return A;
 }
 
-void ArrDelete(int**& A, const int n, const int m)
+void ArrDelete(int**& A, const int n)
 {
 	for (int i(0); i < n; i++)
 		delete[] A[i];
@@ -83,7 +83,7 @@ int main()
 
 	cout << endl << "Sum array: " << ArrSumPluss(arr, n, m) << endl;
 
-	ArrDelete(arr, n, m);
+	ArrDelete(arr, n);
 	system("pause");
 	return NULL;
 }
