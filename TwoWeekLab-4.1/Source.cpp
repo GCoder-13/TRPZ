@@ -38,7 +38,7 @@ void Input(ABITURIENT*& A, const int n)
 
 void Output(const ABITURIENT A)
 {
-	cout << setw(16) << A.NAME << setw(8) << A.GENDER << setw(20) << A.SPEC << '\t';
+	cout << setw(20) << A.NAME << setw(8) << A.GENDER << setw(20) << A.SPEC << '\t';
 	for (int j = 0; j < 3; j++)
 	{
 		cout << setw(3) << A.EXAM[j] ;
@@ -48,16 +48,16 @@ void Output(const ABITURIENT A)
 
 void Output(const ABITURIENT* A, const int n)
 {
-	cout << endl << setw(10) << "NAME" << setw(16) << "GENDER" << setw(16) << "OCUPATION" << setw(13) << "EXEM" << endl
-		<< "------------------------------------------------------------------" << endl;
+	cout << endl << setw(14) << "NAME" << setw(16) << "GENDER" << setw(16) << "OCUPATION" << setw(13) << "EXEM" << endl
+		<< "---------------------------------------------------------------------" << endl;
 	for (int i(0); i < n; i++)
 		Output(A[i]);
 }
 
 void Output(const ABITURIENT* A, const int n, const int rate)
 {
-	cout << endl << setw(10) << "NAME" << setw(16) << "GENDER" << setw(16) << "OCUPATION" << setw(13) << "EXEM" << endl
-		<< "------------------------------------------------------------------" << endl;
+	cout << setw(14) << "NAME" << setw(16) << "GENDER" << setw(16) << "OCUPATION" << setw(13) << "EXEM" << endl
+		<< "---------------------------------------------------------------------" << endl;
 	bool print = false;
 	for (int i(0); i < n; i++)
 	{
@@ -94,7 +94,7 @@ void Sort(ABITURIENT*& A, const int n)
 
 int main()
 {
-	const int N = 2;
+	const int N = 3;
 	ABITURIENT* ABIT = new ABITURIENT[N];
 	Input(ABIT, N);
 
@@ -105,6 +105,7 @@ int main()
 	int rate;
 	cout << endl << "Enter pass rate: ";
 	cin >> rate;
+	cout << "Gained pass rate: " << endl;
 	Output(ABIT, N, rate);
 	
 	system("pause");
