@@ -40,7 +40,7 @@ int main()
 
 	
 
-	ArrDelete(arr, n, m);
+	ArrDelete(arr, n);
 	system("pause");
 	return NULL;
 }
