@@ -46,12 +46,38 @@ void Output(const ABITURIENT A)
 	cout << endl;
 }
 
-void OutputAll(const ABITURIENT* A, const int n)
+void Output(const ABITURIENT* A, const int n)
 {
 	cout << endl << setw(10) << "NAME" << setw(16) << "GENDER" << setw(16) << "OCUPATION" << setw(13) << "EXEM" << endl
 		<< "------------------------------------------------------------------" << endl;
 	for (int i(0); i < n; i++)
 		Output(A[i]);
+}
+
+void Output(const ABITURIENT* A, const int n, const int rate)
+{
+	cout << endl << setw(10) << "NAME" << setw(16) << "GENDER" << setw(16) << "OCUPATION" << setw(13) << "EXEM" << endl
+		<< "------------------------------------------------------------------" << endl;
+	bool print = false;
+	for (int i(0); i < n; i++)
+	{
+		bool sw = true;
+		for (int j(2); j >= 0; j--)
+		{
+			if (A[i].EXAM[j] < rate)
+			{
+				sw = false;
+				break;
+			}
+		}
+		if (sw)
+		{
+			Output(A[i]);
+			print = true;
+		}
+	}
+	if (!print)
+		cout << "\t\t These students not found" << endl;
 }
 
 void Sort(ABITURIENT*& A, const int n)
@@ -66,26 +92,6 @@ void Sort(ABITURIENT*& A, const int n)
 	}
 }
 
-void OutputPassRate(const ABITURIENT* A, const int n, int rate)
-{
-	cout << endl << setw(10) << "NAME" << setw(16) << "GENDER" << setw(16) << "OCUPATION" << setw(13) << "EXEM" << endl
-		<< "------------------------------------------------------------------" << endl;
-	for (int i(0); i < n; i++)
-	{
-		bool sw = true;
-		for (int j(2); j >= 0; j--)
-		{
-			if (A[i].EXAM[j] < rate)
-			{
-				sw = false;
-				break;
-			}
-		}
-		if (sw)
-			Output(A[i]);
-	}
-}
-
 int main()
 {
 	const int N = 2;
@@ -94,15 +100,13 @@ int main()
 
 	cout << "Sorting: ";
 	Sort(ABIT, N);
-	OutputAll(ABIT, N);
+	Output(ABIT, N);
 
 	int rate;
 	cout << endl << "Enter pass rate: ";
 	cin >> rate;
-	OutputPassRate(ABIT, N, rate);
+	Output(ABIT, N, rate);
 	
-
-
 	system("pause");
 	return NULL;
 }
