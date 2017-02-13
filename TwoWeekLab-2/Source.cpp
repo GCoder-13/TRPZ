@@ -36,7 +36,7 @@ int main()
 				continue;
 			}
 			else F = (x - a) / (x - c);
-		else if (x == 0)
+		else if (x == 0 || c == 0)
 		{
 			cout << setw(9) << x << setw(5) << '|' << setw(10) << " ---- " << endl;
 			continue;
