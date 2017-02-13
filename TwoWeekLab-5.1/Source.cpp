@@ -85,6 +85,8 @@ int main()
 	fin.open("Files\\input.txt", ios_base::in);
 	fout << "--------------------------------------------------" << endl;
 	cout << endl << "The number of sentences that contain an odd number of words: " << StringOddWords(fin, fout) << endl << endl;
+	fin.close();
+	fin.open("Files\\input.txt", ios_base::in);
 	fout << "The number of sentences that contain an odd number of words: " << StringOddWords(fin, fout) << endl;
 	fin.close();
 
