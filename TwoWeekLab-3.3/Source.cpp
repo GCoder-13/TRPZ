@@ -24,6 +24,7 @@ void StrAndWord(string& str)
 		{
 			if (str[i - 1] == ' ' || str[i - 1] == '.' || str[i - 1] == '!' || str[i - 1] == '?')
 				word--;
+
 			nStr++;
 			if (word != 0)
 				cout << "String " << nStr << ": " << word << " words" << endl;
@@ -38,8 +39,44 @@ void StrAndWord(string& str)
 
 void StringLength(string& str)
 {
-	int length = 0;
-	for (int i(0); i < str.length(); i++)
+	int st = 0, fn, len = 0;
+
+	for (int i(st); str[i] == ' ' || str[i] == '.' || str[i] == '!' || str[i] == '?'; )
+		st = ++i;
+
+	int temp = st;
+	for (int i(st); i < str.length(); i++)
+	{
+		if (str[i] == '.' || str[i] == '!' || str[i] == '?')
+		{
+			if (len == i - temp)
+			{
+				for (int j(st); j <= fn; j++)
+					cout << str[j];
+				cout << endl;
+				st = temp;
+				fn = i;
+			}
+			else if (len <= i - temp)
+			{
+				len = i - temp;
+				st = temp;
+				fn = i;
+			}
+			
+
+			while(str[i] == ' ' || str[i] == '.' || str[i] == '!' || str[i] == '?')
+				temp = ++i;
+		}
+	}
+	for (int i(st); i <= fn; i++)
+		cout << str[i];
+}
+
+void WordDelete(string& str)
+{
+	int st = 0, fn;
+	for (int i(st); i < str.length(); i++)
 	{
 
 	}
@@ -61,7 +98,9 @@ int main()
 	}
 
 	StrAndWord(str);
-
+	cout << endl << "The shortest sentence:" << endl;
+	StringLength(str);
+	cout << endl;
 	
 	system("pause");
 	return NULL;
