@@ -11,7 +11,9 @@ void StrAndWord(string& str)
 	{
 		if (i - 1 == 0 && str[i - 1] != ' ' && str[i] == ' ')
 			word++;
-		else if ((str[i] == ' ' && str[i - 1] == ' ') || str[i] == ',' || str[i] == ';' || str[i] == ':')
+		else if ((str[i] == ' ' && str[i - 1] == ' ') || (str[i] == ' ' && str[i + 1] == ',') ||
+			(str[i] == ' ' && str[i + 1] == ';') || (str[i] == ' ' && str[i + 1] == ':') || 
+			str[i] == ',' || str[i] == ';' || str[i] == ':')
 			continue;
 		else if (str[i] == ' ')
 			word++;
