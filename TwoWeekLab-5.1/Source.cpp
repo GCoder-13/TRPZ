@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -12,13 +13,13 @@ void Print(ifstream& fin, ofstream& fout)
 {
 	char temp;
 	bool check = false;
-	fout << "--------------------------------------------------" << endl;
+	fout << "------------------------------------------------------------" << endl;
 	while (fin.good())
 	{
 		temp = fin.get();
 		if (temp == ':' && !check)
 			check = true;
-		else if (check)
+		else if (check && temp>0)
 		{
 			cout << temp;
 			fout << temp;
@@ -30,34 +31,35 @@ void Print(ifstream& fin, ofstream& fout)
 
 int StringOddWords(ifstream& fin, ofstream& fout)
 {
-	char temp;
-	int word = 0;
-	int str = 0;
+	string word;
+	int w = 0;
+	int nStr = 0;
+	bool sw = false;
 	while (fin.good())
 	{
-		temp = fin.get();
-		if (temp == ' ' || temp == '.')
-			word++;
-		if (temp == '.' && (word & 1))
+		fin >> word;
+		w++;
+		if (word.at(word.length() - 1) == '.' || word.at(word.length() - 1) == '!' || word.at(word.length() - 1) == '?')
 		{
-			str++;
-			word = 0;
+			if (w & 1)
+				nStr++;
+			w = 0;
 		}
 	}
-	return str;
+	return nStr;
 }
 
 void WordDelete(ifstream& fin, ofstream& fout)
 {
 	char temp;
 	bool check = true;
-	fout << "--------------------------------------------------" << endl;
+	fout << "------------------------------------------------------------" << endl;
 	while (fin.good())
 	{
 		temp = fin.get();
 		if (temp == '.')
 			check = true;
-		if (temp != ',' && check)
+		if (temp != ',' && check && temp > 0)
 		{
 			cout << temp;
 			fout << temp;
@@ -83,9 +85,10 @@ int main()
 	fin.close();
 
 	fin.open("Files\\input.txt", ios_base::in);
-	fout << "--------------------------------------------------" << endl;
+	fout << "------------------------------------------------------------" << endl;
 	cout << endl << "The number of sentences that contain an odd number of words: " << StringOddWords(fin, fout) << endl << endl;
 	fin.close();
+
 	fin.open("Files\\input.txt", ios_base::in);
 	fout << "The number of sentences that contain an odd number of words: " << StringOddWords(fin, fout) << endl;
 	fin.close();
