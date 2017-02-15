@@ -29,6 +29,13 @@ void Print(ifstream& fin, ofstream& fout)
 	fout << endl;
 }
 
+bool CharLast(string& str, char let)
+{
+	if (str.at(str.length() - 1) == let)
+		return true;
+	else return false;
+}
+
 int StringOddWords(ifstream& fin, ofstream& fout)
 {
 	string word;
@@ -39,7 +46,10 @@ int StringOddWords(ifstream& fin, ofstream& fout)
 	{
 		fin >> word;
 		w++;
-		if (word.at(word.length() - 1) == '.' || word.at(word.length() - 1) == '!' || word.at(word.length() - 1) == '?')
+		if (word == "." || word == "!" || word == "?")
+			w--;
+		
+		if (CharLast(word,'.') || CharLast(word, '!') || CharLast(word, '?'))
 		{
 			if (w & 1)
 				nStr++;
