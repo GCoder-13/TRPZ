@@ -64,13 +64,14 @@ int Min(int* arr, const int n)
 }
 
 /* Функція обчислення суми послідовності: y = 0.01*exp(-0.5*x) + 0.05*x^3 при x = (-10..20); y < 0 || y > 90 */
-double SumOrder(const int st = -10, const int fn = 20)
+double SumOrder(const int st = -20, const int fn = 10)
 {
 	double y, sum = 0;
 	for (int x(st); x <= fn; x++)
 	{
-		y = 0.01 * exp(-0.5 * x) + 0.05*pow(x, 3);
-		if (y < 0 || y > 90)
+		y = pow(x, 4) - 10.2*pow(x, 3) - pow(x, 2) + 2.1*x + 37.7;
+		cout << '\t' << y << endl;
+		if (y < 2 * x)
 			sum += y;
 	}
 	return sum;
