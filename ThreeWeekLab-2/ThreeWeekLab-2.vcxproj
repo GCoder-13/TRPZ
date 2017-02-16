@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{29C58F8D-2F55-43D3-B8FB-49F68E743E1D}</ProjectGuid>
+    <ProjectGuid>{D1AF0354-F615-4E35-940F-3E44290762DA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ThreeWeekLab22_4</RootNamespace>
+    <RootNamespace>ThreeWeekLab2</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
