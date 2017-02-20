@@ -1,4 +1,5 @@
 #include <iostream>
+#include <typeinfo>
 #include <string>
 #include <cmath>
 
@@ -95,15 +96,23 @@ double SumOrder(const int st = -20, const int fn = 10)
 
 int MyFunction(int var, ...)
 {
+	int rez = var;
 	va_list ptr;
-	int rez = 0;
 	__crt_va_start(ptr, var);
-	char temp = __crt_va_arg(ptr, char);
-	for (; var; var = __crt_va_arg(ptr, char))
+	for ( ; var != '^'; var = __crt_va_arg(ptr, char))
 	{
-		if (var == '+')
-
-			temp = var;
+		if(var == '+')
+			rez += __crt_va_arg(ptr, int);
+		else if(var ==  '-')
+			rez -= __crt_va_arg(ptr, int);
+		else if (var == '*')
+			rez *= __crt_va_arg(ptr, int);	 
+		else if (var == '/')
+			rez /= __crt_va_arg(ptr, int);
+		else if (var == '&')
+			rez &= __crt_va_arg(ptr, int);
+		else if (var == '%')
+			rez %= __crt_va_arg(ptr, int);
 	}
 	__crt_va_end(ptr);
 	return rez;
@@ -112,11 +121,12 @@ int MyFunction(int var, ...)
 int main(int argc, char** argv)
 {
 #define CHECK 1
+
+	cout << endl << "Rezult: " << MyFunction(4, '+', 1, '*', 2, '^') << endl;
+
 	int a, b;
 	cout << "Enter a, b: ";
 	cin >> a >> b;
-
-	cout << endl << MyFunction(5, '+', 2, '+', 3) << endl;
 
 #if CHECK
 	cout << "a + b = " << Addition(a, b) << endl;
