@@ -32,7 +32,7 @@ int ArrSumOddElem(const int *arr, const int n)
 {
 	int sum = 0;
 	for (int i = 0; i < n; i++)
-		if (arr[i] & 1)
+		if (i & 1)
 			sum += arr[i];
 	return sum;
 }
@@ -72,11 +72,15 @@ void ArrOutput(int **arr, const int n, const int m)
 }
 
 /* Заповнити матрицю нулями над головною діагоналлю */
-void ArrZeroOverDiagonal(int **arr, const int n, const int m)
+bool ArrZeroOverDiagonal(int **arr, const int n, const int m)
 {
-	int indexZero = 1;
-	for (int i = 0; i < n && indexZero < m; i++)
-		arr[i][indexZero++] = 0;
+	int indexZero = 0;
+	if (n != m)
+		return false;
+	for (int i = 0; i < n; i++)
+		for (int j = ++indexZero; j < m; j++)
+			arr[i][j] = 0;
+	return true;
 }
 
 /* Обчислити суми елементів в стовпчиках */
@@ -118,8 +122,9 @@ int main()
 	ArrOutput(arr3, n, m);
 
 	cout << endl << "Array zero over diagonal:" << endl;
-	ArrZeroOverDiagonal(arr3, n, m);
-	ArrOutput(arr3, n, m);
+	if (!ArrZeroOverDiagonal(arr3, n, m))
+		cout << "Matrix is not square" << endl;
+	else ArrOutput(arr3, n, m);
 
 	cout << endl << "Sum columns:" << endl;
 	ArrSumCol(arr3, n, m);
