@@ -62,7 +62,7 @@ int main()
 	int temp;
 	cout << endl << "Enter number of letter for check (str3, str1(n)): ";
 	cin >> num;
-	cout << endl << "Comparison str3, str1(n):  ";
+	cout << endl << "Comparison str3(n), str1(n):  ";
 	if (temp = strncmp(str3, str1, num) < 0)
 		cout << "str3(n) < str1(n)" << endl;
 	else if (temp = strncmp(str3, str1, num) > 0)
