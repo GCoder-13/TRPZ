@@ -3,6 +3,20 @@
 
 using namespace std;
 
+/* Замінити символи одного рядка заданою кількістю символів іншого рядка, починаючи із заданої позиції */
+void ChangeStrStrN(char *str1, const char* str2, int st, const int n)
+{
+	st--;
+	if (st < 0)
+		st = 0;
+	else if (st > strlen(str1))
+		st = strlen(str1);
+	if (st + n > sizeof(str1))
+		str1[st + n] = '\0';
+	for (int i = st, j = 0; j < n; i++, j++)
+		str1[i] = str2[j];
+}
+
 int main()
 {
 	const int MAX = 50;
@@ -41,25 +55,57 @@ int main()
 
 	cout << endl << "Comparison str1, str2:  ";
 	if (strcmp(str1, str2) < 0)
-		cout << "str1 > str2" << endl;
-	else if(strcmp(str1, str2) > 0)
 		cout << "str1 < str2" << endl;
+	else if(strcmp(str1, str2) > 0)
+		cout << "str1 > str2" << endl;
 	else cout << "str1 == str2" << endl;
-
-	cout << endl << "Enter number of letter for check (str1 == str3(n)): ";
+	int temp;
+	cout << endl << "Enter number of letter for check (str3, str1(n)): ";
 	cin >> num;
-	cout << endl << "Comparison str1, str3(n):  ";
-	if (strncmp(str1, str3, num) < 0)
-		cout << "str1 > str3(n)" << endl;
-	else if (strncmp(str1, str3, num) > 0)
-		cout << "str1 < str3(n)" << endl;
-	else cout << "str1 == str3(n)" << endl;
+	cout << endl << "Comparison str3, str1(n):  ";
+	if (temp = strncmp(str3, str1, num) < 0)
+		cout << "str3(n) < str1(n)" << endl;
+	else if (temp = strncmp(str3, str1, num) > 0)
+		cout << "str3(n) > str1(n)" << endl;
+	else cout << "str3(n) == str1(n)" << endl;
 
 	char let;
 	cout << endl << "Enter letter for search (str2): ";
 	cin >> let;
-	cout << "Index letter: " << strchr(str2, let) - str2 << endl;
+	cin.ignore();
+	cin.clear();
+	cout << "Index letter: ";
+	if(strchr(str2, let) != NULL)
+		cout << strchr(str2, let) - str2 << endl;
+	else cerr << "Letter don\'t found" << endl; 
 
+	char str4[MAX];
+	cout << endl << "Enter string for search (str1): ";
+	cin.get(str4, MAX);
+	cin.ignore();
+	cin.clear();
+	cout << "Index string: ";
+	if(strstr(str1, str4) != NULL)
+		cout << strstr(str1, str4) - str1 << endl;
+	else cerr << "String don\'t found" << endl;
+
+	cout << endl << "------------------------------------------------------" << endl;
+	cout << endl << "Enter two string:" << endl;
+
+	cout << "str1 >  ";
+	cin.get(str1, MAX);
+	cin.ignore(MAX, '\n');
+	cin.clear();
+
+	cout << "str2 >  ";
+	cin.get(str2, MAX);
+	cin.ignore();
+	cin.clear();
+	int st;
+	cout << "Enter starn and number letter (str2):";
+	cin >> st >> num;
+	ChangeStrStrN(str1, str2, st, num);
+	cout << endl << "Str1:  " << str1 << endl;
 
 	system("pause");
 	return 0;
