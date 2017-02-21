@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <random>
 
@@ -15,6 +16,80 @@ union MyUnion
 	long Long;
 	string* String;
 };
+
+struct Date
+{
+	int day;
+	int mount;
+	int year;
+};
+
+struct Student
+{
+	string name;
+	Date dateBirth;
+	string profession;
+	string group;
+	unsigned long long numberGradebook;	
+};
+
+void StudentInput(Student& st)
+{
+	ofstream fout("Text.txt", ios_base::app);
+	cout << "Enter name: ";
+	getline(cin, st.name);
+	fout << st.name << endl;
+	cout << "Enter date of birth (DD MM YYYY): ";
+	cin >> st.dateBirth.day >> st.dateBirth.mount >> st.dateBirth.year;
+	fout << st.dateBirth.day << ' ' << st.dateBirth.mount << ' ' << st.dateBirth.year << endl;
+	cin.ignore();
+	cin.clear();
+	cout << "Enter profession: ";
+	getline(cin, st.profession);
+	fout << st.profession << endl;
+	cout << "Enter group: ";
+	cin >> st.group;
+	fout << st.group << endl;
+	cout << "Enter number of Gradebook: ";
+	cin >> st.numberGradebook;
+	fout << st.numberGradebook << endl << endl;
+	cin.ignore();
+	cin.clear();
+	fout.close();
+}
+
+void StudentOutput(const Student* st, const int n)
+{
+	for (int i = 0; i < n; i++, st++)
+	{
+		cout << "Name: " << st->name << endl;
+		cout << "Date of birth: " << st->dateBirth.day << '/' << st->dateBirth.mount << '/' << st->dateBirth.year << endl;
+		cout << "Profession: " << st->profession << endl;
+		cout << "Group: " << st->group << endl;
+		cout << "Number of Gradebook: " << st->numberGradebook << endl;
+		cout << endl << "--------------------------------------------------------------" << endl << endl;
+	}
+}
+
+Student*& StRead(const int N)
+{
+	Student *st = new Student[N];
+	ifstream fin("Text.txt");
+	for (int i = 0; i < N; i++)
+	{
+		getline(fin, st[i].name);
+		fin >> st[i].dateBirth.day >> st[i].dateBirth.mount >> st[i].dateBirth.year;
+		fin.ignore();
+		fin.clear();
+		getline(fin, st[i].profession);
+		getline(fin, st[i].group);
+		fin >> st[i].numberGradebook;
+		fin.ignore();
+		fin.clear();
+	}
+	fin.close();
+	return st;
+}
 
 int main()
 {
@@ -72,6 +147,28 @@ int main()
 	myTypes->String = new string;
 	*myTypes->String = "My name is Andriy.";
 	cout << "String: " << *myTypes->String << endl;
+	delete myTypes->String;
+
+	system("pause");
+	system("cls");
+
+	ofstream clear("Text.txt", ios_base::trunc);
+	clear.close();
+
+	const int STMAX = 2;
+	Student st[STMAX];
+	for (int i = 0; i < STMAX; i++)
+	{
+		StudentInput(st[i]);
+		cout << endl << "--------------------------------------------------" << endl;
+	}
+	system("cls");
+	Student *pst = st;
+	StudentOutput(st, STMAX);
+
+	cout << "Read file:" << endl;
+	Student *stFile = StRead(STMAX);
+	StudentOutput(stFile, STMAX);
 
 	system("pause");
 	return 0;
