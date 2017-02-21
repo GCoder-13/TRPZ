@@ -30,7 +30,7 @@ struct Student
 	Date dateBirth;
 	string profession;
 	string group;
-	unsigned long long numberGradebook;	
+	int numberGradebook;	
 };
 
 void StudentInput(Student& st)
@@ -85,6 +85,7 @@ Student*& StRead(const int N)
 		getline(fin, st[i].group);
 		fin >> st[i].numberGradebook;
 		fin.ignore();
+		fin.ignore();
 		fin.clear();
 	}
 	fin.close();
@@ -94,9 +95,9 @@ Student*& StRead(const int N)
 int main()
 {
 	days_of_week day1, day2;
-	day1 = Mon;
+	day1 = Tue;
 	day2 = Thu;
-	int diff = day2 - day1;
+	int diff = day1 - day2;
 	cout << "day1: Mon\tday2: Thu" << endl;
 	cout << "The difference in days: " << diff << endl;
 	if (day1 < day2)
@@ -113,7 +114,7 @@ int main()
 	{
 		if (i == 0 || i % 3 == 0)
 		{
-			uniform_int_distribution<int> rd(0, 255);
+			uniform_int_distribution<int> rd('a', 'x');
 			myTypes[i].Ch = rd(random);
 			cout << "Char: " << myTypes[i].Ch << endl;
 		}
@@ -164,12 +165,13 @@ int main()
 	}
 	system("cls");
 	Student *pst = st;
-	StudentOutput(st, STMAX);
+	StudentOutput(pst, STMAX);
 
 	cout << "Read file:" << endl;
 	Student *stFile = StRead(STMAX);
 	StudentOutput(stFile, STMAX);
 
+	delete[] stFile;
 	system("pause");
 	return 0;
 }
