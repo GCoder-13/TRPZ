@@ -11,21 +11,23 @@ void ChangeStrStrN(char *str1, const char* str2, int st, const int n)
 		st = 0;
 	else if (st > strlen(str1))
 		st = strlen(str1);
-	if (st + n > sizeof(str1))
+	if (st + n > strlen(str1))
 		str1[st + n] = '\0';
 	for (int i = st, j = 0; j < n; i++, j++)
 		str1[i] = str2[j];
 }
-
+#define ON 0
 int main()
 {
+
 	const int MAX = 50;
 	char str1[MAX], str2[MAX];
+#if ON
 	cout << "Enter two strings:" << endl;
 
 	cout << "str1 >  ";
 	cin.get(str1, MAX);
-	cin.ignore(MAX,'\n');
+	cin.ignore(MAX, '\n');
 	cin.clear();
 
 	cout << "str2 >  ";
@@ -56,7 +58,7 @@ int main()
 	cout << endl << "Comparison str1, str2:  ";
 	if (strcmp(str1, str2) < 0)
 		cout << "str1 < str2" << endl;
-	else if(strcmp(str1, str2) > 0)
+	else if (strcmp(str1, str2) > 0)
 		cout << "str1 > str2" << endl;
 	else cout << "str1 == str2" << endl;
 	int temp;
@@ -75,9 +77,9 @@ int main()
 	cin.ignore();
 	cin.clear();
 	cout << "Index letter: ";
-	if(strchr(str2, let) != NULL)
+	if (strchr(str2, let) != NULL)
 		cout << strchr(str2, let) - str2 << endl;
-	else cerr << "Letter don\'t found" << endl; 
+	else cerr << "Letter don\'t found" << endl;
 
 	char str4[MAX];
 	cout << endl << "Enter string for search (str1): ";
@@ -85,12 +87,13 @@ int main()
 	cin.ignore();
 	cin.clear();
 	cout << "Index string: ";
-	if(strstr(str1, str4) != NULL)
+	if (strstr(str1, str4) != NULL)
 		cout << strstr(str1, str4) - str1 << endl;
 	else cerr << "String don\'t found" << endl;
 
 	cout << endl << "------------------------------------------------------" << endl;
-	cout << endl << "Enter two string:" << endl;
+#else
+	cout << "Enter two string:" << endl;
 
 	cout << "str1 >  ";
 	cin.get(str1, MAX);
@@ -101,11 +104,12 @@ int main()
 	cin.get(str2, MAX);
 	cin.ignore();
 	cin.clear();
-	int st;
+	int st, num;
 	cout << "Enter starn and number letter (str2):";
 	cin >> st >> num;
 	ChangeStrStrN(str1, str2, st, num);
 	cout << endl << "Str1:  " << str1 << endl;
+#endif
 
 	system("pause");
 	return 0;
