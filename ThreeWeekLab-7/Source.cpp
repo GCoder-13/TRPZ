@@ -37,19 +37,30 @@ Item* CreateItem()
 	return ptr;
 }
 
-/* Очищення списку */
-void DeleteList(Item *&ptr)
+Item* AddToTheStart(Item *first)
 {
-	if (EmptyListInfo(ptr))
+	Item *p = CreateItem();
+	if (first)
+		first->back = p;
+	p->next = first;
+	return p;
+}
+
+Item* DeleteElem(Item *ptr)
+{
+	Item *elem = ptr->next;
+	delete ptr;
+	return elem;
+}
+
+/* Очищення списку */
+void DeleteList(Item *&list)
+{
+	if (EmptyListInfo(list))
 		return;
 	else cout << "\t List cleaned" << endl;
-	Item *del;
-	while(ptr != NULL)
-	{
-		del = ptr->next;
-		delete ptr;
-		ptr = del;
-	}
+	while(list != NULL)
+		list = DeleteElem(list);
 }
 
 /* Додавання елементу в кінець списку */
@@ -59,13 +70,57 @@ void AddToTheEnd(Item *ptr)
 		ptr = ptr->next;
 	ptr->next = CreateItem();
 	ptr->next->back = ptr;
-	cout << "\t New items added to the list" << endl;
 }
 
 /* Отримання покажчика на i–й елемент списку */
+Item* PtrElementN(Item *list, const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (list == NULL)
+			return NULL;
+		list = list->next;
+	}
+	return list;
+}
+
 /* Отримання номеру елементу списку за покажчиком на елемент */
+int NElementPtr(const Item *list, Item *elem)
+{
+	int i = 0;
+	while(list != elem)
+	{
+		list = list->next;
+		i++;
+	}
+	return i+1;
+}
+
 /* Видалення елементів списку починаючи з елементу a по елемент b */
+Item* DeleteFew(Item *st, const int n)
+{
+	Item *begin = st->back;
+	cout << "\t Deleted elements" << endl;
+	for (int i = 0; i <= n && st != NULL; i++)
+	{
+		st = DeleteElem(st);
+	}
+	if (st)
+		st->back = begin;
+	if(begin)
+		begin->next = st;
+	else return st;
+}
+
 /* Вставка елемента в список перед визначеним елементом */
+void AddElem(Item *elem)
+{
+	Item *el = CreateItem();
+	el->back = elem->back;
+	el->next = elem;
+	elem->back->next = el;
+	elem->back = el;
+}
 
 /* Друк вмісту елементів списку на екран */
 void OutputList(Item *list)
@@ -77,6 +132,17 @@ void OutputList(Item *list)
 		OutputDate(list);
 		list = list->next;
 	}
+}
+
+Item* FindElem(Item *list, const int elem)
+{
+	while (list != NULL)
+	{
+		if (elem == list->data)
+			return list;
+		else list = list->next;
+	}
+	return NULL;
 }
 
 inline void OutputMenu()
@@ -102,6 +168,8 @@ void SwichMenu(Item *&list)
 		cin >> action;
 		switch (action)
 		{
+			int elem;
+			Item *ptr;
 		case 1:
 			DeleteList(list);
 			break;
@@ -110,10 +178,59 @@ void SwichMenu(Item *&list)
 				list = CreateItem();
 			else AddToTheEnd(list);
 			break;
-		case 4: break;
-		case 5: break;
-		case 7: break;
-		case 9: break;
+		case 4:
+			cout << "Enter number element: ";
+			cin >> elem;
+			if (elem <= 0)
+			{
+				cerr << "\t Incorrect input" << endl;
+				break;
+			}
+			cout << "Element " << elem << ": ";
+			ptr = PtrElementN(list, elem - 1);
+			if (ptr)
+				OutputDate(ptr);
+			else cout << "don\'t found" << endl;
+			break;
+		case 5:
+			cout << "Enter element: ";
+			cin >> elem;
+			ptr = FindElem(list, elem);
+			if (ptr)
+				cout << "This element number: " << NElementPtr(list, ptr) << endl;
+			else cout << "\t This element don\'t found" << endl;
+			break;
+		case 7:
+		{
+			int a, b;
+			cout << "Enter start and finish clearing: ";
+			cin >> a >> b;
+			if (a <= 0 || b <= 0 || a > b)
+			{
+				cerr << "\t Incorrect input" << endl;
+				break;
+			}
+			ptr = PtrElementN(list, a - 1);
+			if (ptr && PtrElementN(list, b - 1))
+				list = DeleteFew(ptr, b-a);
+			else cout << "\t This elements don\'t found" << endl;
+			break;
+		}
+		case 9:
+			cout << "Enter number element: ";
+			cin >> elem;
+			if (elem <= 0)
+			{
+				cerr << "\t Incorrect input" << endl;
+				break;
+			}
+			ptr = PtrElementN(list, elem - 1);
+			if (elem == 1)
+				list = AddToTheStart(ptr);
+			else if (ptr)
+				AddElem(ptr);
+			else cout << "\t This element don\'t found" << endl;
+			break;
 		case 10:
 			if(!EmptyListInfo(list))
 				OutputList(list);
