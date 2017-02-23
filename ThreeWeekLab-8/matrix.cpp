@@ -16,7 +16,7 @@ void matrix::Delete(int **& arr, const int n)
 {
 	for (int i = 0; i < n; i++)
 		vec::Delete(arr[i]);
-	vec::Delete(*arr);
+	delete[] arr;
 }
 
 void matrix::Input(int ** arr, const int n, const int m)
@@ -27,6 +27,12 @@ void matrix::Input(int ** arr, const int n, const int m)
 			vec::Input(arr[i], m);
 		cout << endl << "------------------------------" << endl << endl;
 	}
+}
+
+void matrix::Output(const int ** arr, const int n, const int m)
+{
+	for (int i = 0; i < n; i++)
+		vec::Output(arr[i], m);
 }
 
 void matrix::Add(int ** arr, const int n, const int m, const int elem)
