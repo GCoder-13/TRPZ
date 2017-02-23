@@ -1,20 +1,19 @@
 #pragma once
 #define _VECTOR_H_
 
-namespace vec
+namespace vector
 {
-	struct Vector
-	{
-		int x, y;
-	};
-	void Add(Vector &var, const int num);
-	void Invert(Vector &var);
-	int Sum(const Vector var);
-	Vector Add(const Vector vec1, const Vector vec2);
-	int Multiplication(const Vector vec1, const Vector vec2);
-	void Output(const Vector var);
-
+	int* Create(const int n);
+	void Delete(int *&arr);
+	void Input(int *arr, const int n);
+	void Output(const int *arr, const int n);
+	void Add(int *arr, const int n, const int elem);
+	void Invert(int *arr, const int n);
+	int Sum(const int *arr, const int n);
+	int* Add(const int *arr1, const int *arr2, const int n);
+	int Multiplication(const int *arr1, const int *arr2, const int n);
 }
+namespace vec = vector;
 
 #if !defined(_VECTOR_H_)
 #include "vector.h"
