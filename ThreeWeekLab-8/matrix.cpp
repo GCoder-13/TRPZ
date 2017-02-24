@@ -23,13 +23,12 @@ void matrix::Input(int ** arr, const int n, const int m)
 {
 	for (int i = 0; i < n; i++)
 	{
-		for (int j = 0; j < m; j++)
-			vec::Input(arr[i], m);
+		vec::Input(arr[i], m);
 		cout << endl << "------------------------------" << endl << endl;
 	}
 }
 
-void matrix::Output(const int ** arr, const int n, const int m)
+void matrix::Output(int ** arr, const int n, const int m)
 {
 	for (int i = 0; i < n; i++)
 		vec::Output(arr[i], m);
@@ -41,7 +40,7 @@ void matrix::Add(int ** arr, const int n, const int m, const int elem)
 		vec::Add(arr[i], m, elem);
 }
 
-int ** matrix::Transpose(const int ** arr, const int n, const int m)
+int ** matrix::Transpose(int ** arr, const int n, const int m)
 {
 	int **tr = Create(m, n);
 	for (int i = 0; i < m; i++)
@@ -50,7 +49,15 @@ int ** matrix::Transpose(const int ** arr, const int n, const int m)
 	return tr;
 }
 
-int** matrix::Add(const int **arr1, const int **arr2, const int n, const int m)
+int matrix::Sum(int ** arr, const int n, const int m)
+{
+	int sum = 0;
+	for (int i = 0; i < n; i++)
+		sum += vec::Sum(arr[i], m);
+	return sum;
+}
+
+int** matrix::Add(int **arr1, int **arr2, const int n, const int m)
 {
 	int **res = Create(n, m);
 	for (int i = 0; i < n; i++)
@@ -59,12 +66,28 @@ int** matrix::Add(const int **arr1, const int **arr2, const int n, const int m)
 	return res;
 }
 
-int ** matrix::Multiplication(const int ** arr1, const int row1, const int col1, const int ** arr2, const int col2)
+int ** matrix::Multiplication(int ** arr1, const int row1, const int col1, int ** arr2, const int col2)
 {
 	int **res = Create(row1, col2);
 	for (int i = 0; i < row1; i++)
 		for (int j = 0; j < col2; j++)
-			for (int z; z < row1; z++)
+		{
+			res[i][j] = 0;
+			for (int z = 0; z < col1; z++)
 				res[i][j] += arr1[i][z] * arr2[z][j];
+		}
+	Output(res, row1, col2);
+	return res;
+}
+
+int * matrix::Multiplication(int * vec, int ** arr, const int n, const int m)
+{
+	int *res = vec::Create(m);
+	for (int i = 0; i < n; i++)
+	{
+		res[i] = 0;
+		for (int j = 0; j < m; j++)
+			res[i] += vec[j] * arr[i][j];
+	}
 	return res;
 }
