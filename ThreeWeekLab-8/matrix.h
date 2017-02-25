@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #define _MATRIX_H_
 
 namespace matrix
