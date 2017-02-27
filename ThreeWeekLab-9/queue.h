@@ -11,23 +11,35 @@ private:
 	{
 		TData cell;
 		Data *next;
-		Data() : cell(NULL), next(nullptr) {};
-		Data(const TData el) : cell(el), next(nullptr) {};
+		Data() : cell(NULL), next(nullptr) { count++; };
+		Data(const TData el) : cell(el), next(nullptr) { count++; };
+		static int count;
 	} *node;
-	mutable Data *head;
-	mutable Data *tail;
+	Data *head;
+	Data *tail;
 	void Delete();
 public:
 	Queue() : head(nullptr), tail(nullptr) {};
-	Queue(const TData elem) : node->Data(elem), head(nullptr), tail(nullptr) {};
+	explicit Queue(const TData elem) : node->Data(elem), head(nullptr), tail(nullptr) {};
 	Queue(const Queue<TData> &copy) : node(copy.node), head(copy.head), tail(copy.tail) {};
 	~Queue();
+	operator TData() { return head->cell; }
 	void put(const TData el);
 	TData get();
-	int Amount() const;
 	void Output() const;
 	bool Empty() const;
+	static int CountCell();
 };
+
+template<class TData>
+int Queue<TData>::Data::count = 0;
+
+template<class TData>
+inline int Queue<TData>::CountCell()
+{
+	std::cout << "Number of cell: " << Data::count << endl;
+	return Data::count;
+}
 
 template<class TData>
 inline void Queue<TData>::Delete()
@@ -38,6 +50,7 @@ inline void Queue<TData>::Delete()
 		delete head;
 		head = temp;
 	}
+	Data::count--;
 }
 
 template<class TData>
@@ -74,22 +87,6 @@ inline TData Queue<TData>::get()
 	TData temp = head->cell;
 	Delete();
 	return temp;
-}
-
-/* Отримання кількості елементів які зберігаються в класі */
-template<class TData>
-int Queue<TData>::Amount() const
-{
-	if (Empty())
-		return NULL;
-	int i = 0;
-	Data *temp = head;
-	while (temp)
-	{
-		temp = temp->next;
-		i++;
-	}
-	return i;
 }
 
 template<class TData>

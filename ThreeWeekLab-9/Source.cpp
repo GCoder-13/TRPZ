@@ -26,7 +26,6 @@ void SwitchMenu(Queue<Int>& queue)
 		cin >> action;
 
 		Int elem;
-		int length = 0;
 		switch (action)
 		{
 		case 1:
@@ -41,9 +40,7 @@ void SwitchMenu(Queue<Int>& queue)
 			queue.~Queue();
 			break;
 		case 4:
-			length = queue.Amount();
-			if (length)
-				cout << "The length of the queue: " << length << endl;
+			queue.CountCell();
 			break;
 		case 5:
 			cout << "Queue:";
