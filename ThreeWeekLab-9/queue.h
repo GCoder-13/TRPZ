@@ -13,6 +13,7 @@ private:
 		Data *next;
 		Data() : cell(NULL), next(nullptr) { count++; };
 		Data(const TData el) : cell(el), next(nullptr) { count++; };
+		Data(const Data &copy) : cell(copy.cell), next(copy.next) {};
 		static int count;
 	} *node;
 	Data *head;
