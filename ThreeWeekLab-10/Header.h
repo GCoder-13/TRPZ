@@ -9,38 +9,55 @@ using namespace std;
 class Animalia
 {
 protected:
-	const string name;	// Ім'я
-	unsigned int age;	// Вік
-	double mass;	// Маса
-	const enum Infratyp	{ Vertebrates, Invertebrates } group;	// Інфратип (хребетні, безхребетні)
+	string name;			// Ім'я
+	int age;				// Вік
+	double mass;			// Маса
 public:
-	Animalia(const string _name, const unsigned int _age, const Infratyp _group);
-	virtual void Show() = 0;
+	Animalia();
+	Animalia(const string _name, const int _age, const double _mass);
+	Animalia(const Animalia &copy);
+	virtual ~Animalia() {};
+	virtual void Input();
+	virtual void Show() const;
 };
 
 /* Ссавці */
 class Mammalia : virtual public Animalia
 {
-	char gender;
 protected:
-
+	char gender;			// Стать
 public:
+	Mammalia();
+	Mammalia(const string name, const int age, const double mass, const char _gender);
+	Mammalia(const Mammalia &copy);
+	~Mammalia() {};
+	void Input();
+	void Show() const;
 };
 
 /* Парнокопитні */
 class Artiodactyla : public Mammalia
 {
-private:
-
 public:
+	Artiodactyla(const string name, const int age, const double mass, const char gender);
+	Artiodactyla(const Artiodactyla &copy);
+	~Artiodactyla() {};
+	void Input();
+	void Show() const;
 };
 
 /* Птахи */
 class Aves : public Animalia
 {
 private:
-
+	char gender;			// Стать
 public:
+	Aves();
+	Aves(const string name, const int age, const double mass, const char _gender);
+	Aves(const Aves &copy);
+	~Aves() {};
+	void Input();
+	void Show() const;
 };
 
 #if !defined(_HEADER_H_)
