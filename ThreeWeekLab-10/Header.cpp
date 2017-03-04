@@ -9,6 +9,7 @@ Animalia::Animalia(const Animalia & copy) : name(copy.name), age(copy.age), mass
 
 void Animalia::Input()
 {
+	cout << fixed << setprecision(3);
 	cout << "Enter name: ";
 	cin >> name;
 	cout << "Enter age: ";

@@ -1,6 +1,7 @@
 #pragma once
 #define _HEADER_H_
 #include <iostream>
+#include <iomanip>
 #include <string>
 
 using namespace std;
@@ -39,6 +40,7 @@ public:
 class Artiodactyla : public Mammalia
 {
 public:
+	Artiodactyla() {};
 	Artiodactyla(const string name, const int age, const double mass, const char gender);
 	Artiodactyla(const Artiodactyla &copy);
 	~Artiodactyla() {};
